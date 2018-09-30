@@ -452,7 +452,8 @@ public class PLPScanner {
 								pos++;
 							}
 							else{
-								error(pos, line(pos), posInLine(pos),"An illegal character is encountered: "+(char)ch+"\n");
+								error(pos, line(pos), posInLine(pos),
+								      "An illegal character is encountered: "+(char)ch+"\n");
 							}
 						}
 					}//switch ch
@@ -559,7 +560,8 @@ public class PLPScanner {
 					break;
 					default:{
 						if(ch=='\n' || ch=='\r' || ch==EOFChar){
-							error(pos, line(pos), posInLine(pos),"Unexpected line terminator or EOF in Comment!\n");
+							error(pos, line(pos), posInLine(pos),
+							      "Unexpected line terminator or EOF in Comment!\n");
 						}
 						pos++;
 					}
@@ -569,7 +571,8 @@ public class PLPScanner {
 				case COMMENT_END:{
 					switch(ch){
 					case '{':{
-						error(pos, line(pos), posInLine(pos),"Invalid character in comment, '%' followed by '{'\n");
+						error(pos, line(pos), posInLine(pos),
+						      "Invalid character in comment, '%' followed by '{'\n");
 					}
 					break;
 					case '}':{
@@ -583,7 +586,8 @@ public class PLPScanner {
 					break;
 					default: {
 						if(ch=='\n' || ch=='\r' || ch==EOFChar){
-							error(pos, line(pos), posInLine(pos),"Unexpected line terminator or EOF in Comment!\n");
+							error(pos, line(pos), posInLine(pos),
+							      "Unexpected line terminator or EOF in Comment!\n");
 						}
 						state = State.IN_COMMENT;
 						pos++;
@@ -617,7 +621,8 @@ public class PLPScanner {
 					break;
 					default: {
 						if(ch=='\n' || ch=='\r' || ch==EOFChar){
-							error(pos, line(pos), posInLine(pos),"Unexpected line terminator or EOF in string!\n");
+							error(pos, line(pos), posInLine(pos),
+							      "Unexpected line terminator or EOF in string!\n");
 						}
 						pos++;
 					}
@@ -648,7 +653,8 @@ public class PLPScanner {
 							try{
 								Integer.parseInt(num);
 							}catch(NumberFormatException e){
-								error(pos, line(pos), posInLine(pos)," The literal of type int is out of range!:"+num+"\n");
+								error(pos, line(pos), posInLine(pos),
+								      " The literal of type int is out of range!:"+num+"\n");
 							}
 							tokens.add(new Token(Kind.INTEGER_LITERAL,startPos, pos - startPos));	
 							state = State.START;
@@ -668,7 +674,8 @@ public class PLPScanner {
 							String num = new String(chars, startPos, pos-startPos);
 							boolean valid = Float.isFinite(Float.parseFloat(num));
 							if (!valid){
-								error(pos, line(pos), posInLine(pos)," The literal of type float is out of range!:"+num+"\n");
+								error(pos, line(pos), posInLine(pos),
+								      " The literal of type float is out of range!:"+num+"\n");
 							}
 							tokens.add(new Token(Kind.FLOAT_LITERAL,startPos, pos - startPos));
 							state = State.START;
@@ -706,7 +713,8 @@ public class PLPScanner {
 						pos++;
 					}
 					else{
-						error(pos, line(pos), posInLine(pos)," Invalid Identifier! UnderScores must be followed by Alphabetic Letter\n");
+						error(pos, line(pos), posInLine(pos),
+						      " Invalid Identifier! UnderScores must be followed by Alphabetic Letter\n");
 					}
 				}
 				break;
