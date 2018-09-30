@@ -2,6 +2,8 @@
  * JUunit tests for the Scanner
  */
 
+package cop5556fa18;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -9,8 +11,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import cop5556fa18.PLPScanner.LexicalException;
-import cop5556fa18.PLPScanner.Token;
+import cop5556fa18.scanner.LexicalException;
+import cop5556fa18.scanner.Token;
 
 public class PLPScannerTest {
 	
