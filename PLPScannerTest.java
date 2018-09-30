@@ -2,8 +2,6 @@
  * JUunit tests for the Scanner
  */
 
-package cop5556fa18;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
