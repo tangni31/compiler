@@ -27,8 +27,8 @@ public class PLPScanner {
 	public static enum Kind {
 		IDENTIFIER, INTEGER_LITERAL, BOOLEAN_LITERAL, FLOAT_LITERAL, STRING_LITERAL,
 		CHAR_LITERAL,
-		KW_string		/*string       */,
-		KW_char			/*char		   */,
+		KW_string	/*string       */,
+		KW_char		/*char		   */,
 		KW_sleep        /*sleep		   */,
 		KW_print        /* print       */,
 		KW_int          /* int         */,
@@ -65,8 +65,8 @@ public class PLPScanner {
 		RPAREN          /* )           */,
 		LBRACE          /* {           */, 
 		RBRACE          /* }           */,
-		LSQUARE			/*[			   */,
-		RSQUARE			/*]			   */,
+		LSQUARE		/*[			   */,
+		RSQUARE		/*]			   */,
 		SEMI            /* ;           */,
 		COMMA           /* ,           */,
 		DOT             /* .           */,
@@ -459,8 +459,6 @@ public class PLPScanner {
 					}//switch ch
 				}
 				break;
-				
-				//////////////////////////////////////////////////////////
 				/*******OPERATORS**************************/
 				case AFTER_MOD:{
 					if(ch=='{'){
