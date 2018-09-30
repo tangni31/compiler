@@ -4,7 +4,7 @@
 ### Scanner: 
 Scanner using a finite automaton, it starts in a distinguished initial state (START). It then moves from state to state based on the next available character of input. When it reaches one of a designated set of final states it recognizes the token associated
 with that state. It uses “longest possible token” rule. Keywords are stored in a HashMap.    
-- Grammar:    
+##### Grammar:    
     LineTerminator → '\n' | '\r' | '\r' '\n'    
     WhiteSpace → ' ' | '\t' | '\f' | LineTerminator    
     Comment → %{  ( (% NOT({) ) | NOT(%) )* %* }    
