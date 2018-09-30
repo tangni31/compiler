@@ -1,13 +1,6 @@
 /**
 * Initial code for the Scanner
 */
-
-/**    
- *  Name: Ni Tang 
- *  Assignment Number: P2
- *  Date Due: September 7, 2018
- */
-
 package cop5556fa18;
 
 import java.util.ArrayList;
