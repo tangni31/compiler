@@ -1,7 +1,6 @@
 /**
 * Initial code for the Scanner
 */
-package cop5556fa18;
 
 import java.util.ArrayList;
 import java.util.Arrays;
