@@ -68,7 +68,6 @@ public class PLPScanner {
 		RSQUARE		/*]		*/,
 		SEMI            /* ;           */,
 		COMMA           /* ,           */,
-		DOT             /* .           */,
 		EOF;            /* end of file */
 	}
 	
@@ -288,6 +287,7 @@ public class PLPScanner {
 	
 	public PLPScanner scan() throws LexicalException {
 		int pos = 0;
+		int dotpos = 0;
 		State state = State.START;
 		int startPos = 0;
 		//TODO:  
@@ -559,7 +559,7 @@ public class PLPScanner {
 					}
 					break;
 					default:{
-						if(ch=='\n' || ch=='\r' || ch==EOFChar){
+						if(ch==EOFChar){
 							error(pos, line(pos), posInLine(pos),
 							      "Unexpected line terminator or EOF in Comment!\n");
 						}
@@ -596,7 +596,12 @@ public class PLPScanner {
 				}
 				break;
 				case IN_CHAR:{
-					if(pos-startPos==2){
+					if(ch == '\''){
+						tokens.add(new Token(Kind.CHAR_LITERAL, startPos, pos - startPos+1));
+						state = State.START;
+						pos++;
+					}
+					else if(pos-startPos==2){
 						if(ch!='\''){
 							error(pos, line(pos), posInLine(pos),"Invalid character constant\n");
 						}
@@ -632,6 +637,7 @@ public class PLPScanner {
 				case AFTER_ZERO:{
 					if(ch=='.'){
 						state = State.IN_FLOAT;
+						dotPos = pos;
 						pos++;
 					}
 					else{
@@ -644,6 +650,7 @@ public class PLPScanner {
 					switch(ch){
 					case '.':{
 						state = State.IN_FLOAT;
+						dotPos = pos;
 						pos++;
 					}
 					break;
@@ -666,9 +673,9 @@ public class PLPScanner {
 				break;
 				case IN_FLOAT:{
 					if (!Character.isDigit(ch)){
-						if((pos-startPos)==1){
-							tokens.add(new Token(Kind.DOT,startPos, pos - startPos));
-							state = State.START;
+						if((pos-dotPos)==1){
+							error(pos, line(pos), posInLine(pos),
+							      " Invaild type float end with \'.\'!\n");
 						}
 						else{
 							String num = new String(chars, startPos, pos-startPos);
