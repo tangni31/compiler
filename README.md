@@ -24,4 +24,5 @@ Scanner groups input characters into tokens. It saves the text of “interesting
     Keywords → print | int | float | boolean | char | string | sleep | while | sin | cos | atan | abs | log      
     
 ## Reference:
-   Programming Language Pragmatics SECOND EDITION.  Author: Michael L. Scott
+   Programming Language Pragmatics SECOND EDITION.   Author: Michael L. Scott      
+   Compilers: Principles, Techniques, and Tools.   Author: Alfred V. Aho, Ravi Sethi, Jeffrey Ullman      
