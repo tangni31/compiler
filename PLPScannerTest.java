@@ -136,75 +136,96 @@ public class PLPScannerTest {
 		@Test
 		public void vaildFloat() throws LexicalException {
 			String input = "float=-0.3145;";  //a valid float
-			show(input);        //Display the input 
-			PLPScanner scanner = new PLPScanner(input).scan();  //Create a Scanner and initialize it
-			show(scanner);   //Display the Scanner
+			show(input);
+			PLPScanner scanner = new PLPScanner(input).scan();
+			show(scanner);
 			checkNext(scanner, PLPScanner.Kind.KW_float,0,5,1,1);
 		}
 		@Test
 		public void vaildPrint() throws LexicalException {
 			String input = "print(\"abcd\"); print(score); print(B);";  //The input is the empty string.  This is legal
-			show(input);        //Display the input 
-			PLPScanner scanner = new PLPScanner(input).scan();  //Create a Scanner and initialize it
-			show(scanner);   //Display the Scanner
+			show(input);
+			PLPScanner scanner = new PLPScanner(input).scan();
+			show(scanner);
 			checkNext(scanner, PLPScanner.Kind.KW_print,0,5,1,1);
 			checkNext(scanner, PLPScanner.Kind.LPAREN,5,1,1,6);
 		}
 		@Test
+		public void vailChar0() throws LexicalException {
+			String input = "\'\'";  // '' empty char
+			show(input);
+			PLPScanner scanner = new PLPScanner(input).scan();
+			show(scanner); 
+		}
+		@Test
+		public void vailChar1() throws LexicalException {
+			String input = "\'a\'";  // 'a'
+			show(input);
+			PLPScanner scanner = new PLPScanner(input).scan();
+			show(scanner);
+		}
+		@Test
 		public void vaildIf() throws LexicalException {
 			String input = "if(a!=b){if(c==false){f='c';}a=x/0.1;};"; //valid if,char,float,div,assign,equal,not equal
-			show(input);        //Display the input 
-			PLPScanner scanner = new PLPScanner(input).scan();  //Create a Scanner and initialize it
-			show(scanner);   //Display the Scanner
-			//checkNextIsEOF(scanner);
+			show(input);
+			PLPScanner scanner = new PLPScanner(input).scan();
+			show(scanner);
 		}
 		@Test
 		public void vaildIdentifier() throws LexicalException {
 			String input = "_____a1_2_fc";//valid identifier
-			show(input);        //Display the input 
-			PLPScanner scanner = new PLPScanner(input).scan();  //Create a Scanner and initialize it
-			show(scanner);   //Display the Scanner
-			//checkNextIsEOF(scanner);
+			show(input);  
+			PLPScanner scanner = new PLPScanner(input).scan(); 
+			show(scanner);
 		}
 		@Test
 		public void vaildBoolean() throws LexicalException {
 			String input = "boolean _adr13__ = true;";  
-			show(input);        //Display the input 
-			PLPScanner scanner = new PLPScanner(input).scan();  //Create a Scanner and initialize it
-			show(scanner);   //Display the Scanner
-			//(scanner);
+			show(input);        
+			PLPScanner scanner = new PLPScanner(input).scan(); 
+			show(scanner);   
 		}
 		@Test
 		public void vailAssign() throws LexicalException {
 			String input = "double d,a,f;";  
-			show(input);        //Display the input 
-			PLPScanner scanner = new PLPScanner(input).scan();  //Create a Scanner and initialize it
-			show(scanner);   //Display the Scanner
-			//checkNextIsEOF(scanner);
+			show(input);        
+			PLPScanner scanner = new PLPScanner(input).scan(); 
+			show(scanner);  
 		}
 		@Test
 		public void vailExper() throws LexicalException {
 			String input = "t=(((4-2)*5.6)/3)+2; %{test valid comments}";  
-			show(input);        //Display the input 
-			PLPScanner scanner = new PLPScanner(input).scan();  //Create a Scanner and initialize it
+			show(input);   
+			PLPScanner scanner = new PLPScanner(input).scan();  
 			show(scanner);   //Display the Scanner
-			//checkNextIsEOF(scanner);
-		}
-		@Test
-		public void vailComm() throws LexicalException {
-			String input = "%{test valid {{{{comments{}";  
-			show(input);        //Display the input 
-			PLPScanner scanner = new PLPScanner(input).scan();  //Create a Scanner and initialize it
-			show(scanner);   //Display the Scanner
-			//checkNextIsEOF(scanner);
 		}
 		@Test
 		public void vailStr() throws LexicalException {
 			String input = "  \"say \"Hi\" \"  ";  
 			show(input);        //Display the input 
+			PLPScanner scanner = new PLPScanner(input).scan(); 
+			show(scanner);   
+		}
+		@Test
+		public void vailComm0() throws LexicalException {
+			String input = "%{test valid {{{{comments{}";  
+			show(input);        //Display the input 
 			PLPScanner scanner = new PLPScanner(input).scan();  //Create a Scanner and initialize it
 			show(scanner);   //Display the Scanner
-			//checkNextIsEOF(scanner);
+		}
+		@Test
+		public void validComm1() throws LexicalException {
+			String input = "%{This is a comment with %%%. \n New line. %}";  
+			show(input);        //Display the input 
+			PLPScanner scanner = new PLPScanner(input).scan();  //Create a Scanner and initialize it
+			show(scanner);   //Display the Scanner
+		}
+		@Test
+		public void validComm2() throws LexicalException {
+			String input = "%{This is a comment. \n New line. %}";  
+			show(input);        //Display the input 
+			PLPScanner scanner = new PLPScanner(input).scan();  //Create a Scanner and initialize it
+			show(scanner);   //Display the Scanner
 		}
 		
 		/******************	Invalid Cases******************************/
@@ -248,82 +269,93 @@ public class PLPScannerTest {
 			}
 		}
 		@Test
-		public void failFloat() throws LexicalException {
-			String input = "-340282366920938463463374607431768211458.9999;";//test float
+		public void failComm0() throws LexicalException {
+			String input = "%{affeafe%{}";//invalid comments: '%' followed by '{'
 			show(input);
-			thrown.expect(LexicalException.class);  //Tell JUnit to expect a LexicalException
+			thrown.expect(LexicalException.class);
 			try {
 				new PLPScanner(input).scan();
-			} catch (LexicalException e) {  //Catch the exception
-				show(e);                    //Display it
-				assertEquals(45,e.getPos()); //Check that it occurred in the expected position
-				throw e;                    //Rethrow exception so JUnit will see it
+			} catch (LexicalException e) {  
+				show(e);                    
+				assertEquals(10,e.getPos()); 
+				throw e;                    
 			}
 		}
 		@Test
-		public void failComment() throws LexicalException {
-			String input = "%{affeafe%{}";//invalid comments
+		public void failComm1() throws LexicalException {
+			String input = "%{fafeagegag";//invalid comment: no end
 			show(input);
-			thrown.expect(LexicalException.class);  //Tell JUnit to expect a LexicalException
+			thrown.expect(LexicalException.class);  
 			try {
 				new PLPScanner(input).scan();
-			} catch (LexicalException e) {  //Catch the exception
-				show(e);                    //Display it
-				assertEquals(10,e.getPos()); //Check that it occurred in the expected position
-				throw e;                    //Rethrow exception so JUnit will see it
+			} catch (LexicalException e) { 
+				show(e);                    
+				assertEquals(12,e.getPos()); 
+				throw e;                    
 			}
 		}
 		@Test
 		public void failStr() throws LexicalException {
-			String input = "\"affeafe";//invalid str 
+			String input = "\"affeafe";//invalid str, lost " 
 			show(input);
-			thrown.expect(LexicalException.class);  //Tell JUnit to expect a LexicalException
+			thrown.expect(LexicalException.class);  
 			try {
 				new PLPScanner(input).scan();
-			} catch (LexicalException e) {  //Catch the exception
-				show(e);                    //Display it
-				assertEquals(8,e.getPos()); //Check that it occurred in the expected position
-				throw e;                    //Rethrow exception so JUnit will see it
+			} catch (LexicalException e) {  
+				show(e);                    
+				assertEquals(8,e.getPos());
+				throw e;  
 			}
 		}
 		@Test
 		public void failChar2() throws LexicalException {
-			String input = "\'a";//invalid char
+			String input = "\'a";//invalid char: lost '
 			show(input);
-			thrown.expect(LexicalException.class);  //Tell JUnit to expect a LexicalException
+			thrown.expect(LexicalException.class); 
 			try {
 				new PLPScanner(input).scan();
-			} catch (LexicalException e) {  //Catch the exception
-				show(e);                    //Display it
-				assertEquals(2,e.getPos()); //Check that it occurred in the expected position
-				throw e;                    //Rethrow exception so JUnit will see it
+			} catch (LexicalException e) {  
+				show(e);                    
+				assertEquals(2,e.getPos()); 
+				throw e;                 
 			}
 		}
 		@Test
-		public void failFlaot() throws LexicalException {
-			String input = "0..";//invalid float
+		public void failFloat0() throws LexicalException {
+			String input = "-340282366920938463463374607431768211458.9999;";//float out of range
 			show(input);
-			thrown.expect(LexicalException.class);  //Tell JUnit to expect a LexicalException
+			thrown.expect(LexicalException.class); 
 			try {
 				new PLPScanner(input).scan();
-			} catch (LexicalException e) {  //Catch the exception
-				show(e);                    //Display it
-				assertEquals(2,e.getPos()); //Check that it occurred in the expected position
-				throw e;                    //Rethrow exception so JUnit will see it
+			} catch (LexicalException e) { 
+				show(e);                    
+				assertEquals(45,e.getPos()); 
+				throw e;  
+		}
+		@Test
+		public void failFloat1() throws LexicalException {
+			String input = "0.";//invalid float
+			show(input);
+			thrown.expect(LexicalException.class);  
+			try {
+				new PLPScanner(input).scan();
+			} catch (LexicalException e) {  
+				show(e);                    
+				assertEquals(2,e.getPos()); 
+				throw e;                    
 			}
 		}
 		@Test
-		public void failComm() throws LexicalException {
-			String input = "%{fafeagegag";//invalid comment
+		public void failFloat2() throws LexicalException {
+			String input = "00.";//invalid float: '.' must follow by digit
 			show(input);
-			thrown.expect(LexicalException.class);  //Tell JUnit to expect a LexicalException
+			thrown.expect(LexicalException.class);
 			try {
 				new PLPScanner(input).scan();
-			} catch (LexicalException e) {  //Catch the exception
-				show(e);                    //Display it
-				assertEquals(12,e.getPos()); //Check that it occurred in the expected position
-				throw e;                    //Rethrow exception so JUnit will see it
+			} catch (LexicalException e) { 
+				show(e);                  
+				assertEquals(3,e.getPos());
+				throw e;              
 			}
 		}		
-		
 }
