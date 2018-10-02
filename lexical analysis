@@ -1,0 +1,20 @@
+Lexical Analysis for Scanner:    
+
+LineTerminator → '\n' | '\r' | '\r' '\n'    
+WhiteSpace → ' ' | '\t' | '\f' | LineTerminator    
+Comment → %{  ( (% NOT({) ) | NOT(%) )* %* }    
+Token → Identifier | Keyword | Literal | Separator | Operator    
+Identifier → IdentifierChar but not a keyword or a Boolean literal    
+IdentifierChar → IdentifierStart IdentifierPart*    
+IdentifierStart →  UnderScoreStart IdentifierStart |A..Z IdentifierPart | a..z IdentifierPart    
+UnderScoreStart → _ UnderScoreStart | _    
+IdentifierPart → IdentifierStart | Digit | _    
+Literal → IdengerLiteral | FloatingPointLiteral | BooleanLiteral    
+IntegerLiteral → 0 | NonZeroDigit Digit*    
+FloatingPointLiteral  → IntegerLiteral . Digit*    
+NoneZeroDigit → 1 .. 9    
+Digit → NonZeroDigit | 0    
+BooleanLiteral → true | false    
+Separators → ( | ) | [ | ] | ; | , | { | }        
+Operators → < | > | <= | >= | - | + | * | / | % | ! | ** | == | = | ? | : | | | & | !=       
+Keywords → print | int | float | boolean | char | string | sleep | while | sin | cos | atan | abs | log    
