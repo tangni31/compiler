@@ -447,10 +447,6 @@ public class PLPScanner {
 								state=State.IN_IDENTIFIER;
 								pos++;
 							}
-							else if(Character.isLetter(ch)){
-								state=State.IN_IDENTIFIER;
-								pos++;
-							}
 							else{
 								error(pos, line(pos), posInLine(pos),
 								      "An illegal character is encountered: "+(char)ch+"\n");
