@@ -21,4 +21,7 @@ Scanner groups input characters into tokens. It saves the text of “interesting
     BooleanLiteral → true | false    
     Separators → ( | ) | [ | ] | ; | , | { | }        
     Operators → < | > | <= | >= | - | + | * | / | % | ! | ** | == | = | ? | : | | | & | !=       
-    Keywords → print | int | float | boolean | char | string | sleep | while | sin | cos | atan | abs | log        
+    Keywords → print | int | float | boolean | char | string | sleep | while | sin | cos | atan | abs | log      
+    
+## Reference:
+   Programming Language Pragmatics SECOND EDITION.  Author: Michael L. Scott
