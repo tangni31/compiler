@@ -1,11 +1,5 @@
 package cop5556fa18;
 
-/*
- * Name: Ni Tang 
- * Assignment Number: P3
- * Date Due: October 5, 2018
- */
-
 import cop5556fa18.PLPScanner.Token;
 import cop5556fa18.PLPScanner.Kind;
 
