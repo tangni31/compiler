@@ -1,0 +1,58 @@
+﻿CFG:
+Program → Identifier Block
+Block → { ( (Declaration | Statement) ; )* }
+Declaration → Type Identifier ( = Expression | ε ) | Type IDENTIFIERLIST
+IDENTIFIERLIST → Identifier (, Identifier)*
+Type → int | float | boolean | char | string
+Statement → IfStatement | AssignmentStatement | SleepStatement 
+| PrintStatement | WhileStatment
+IfStatement → if ( Expression ) Block
+WhileStatement → while ( Expression ) Block
+AssignmentStatement → Identifier = Expression
+SleepStatement → sleep Expression
+PrintStatement → print Expression
+Expression → OrExpression ? Expression : Expression | OrExpression
+OrExpression → AndExpression ( | AndExpression )*
+AndExpression → EqExpression ( & EqExpression )*
+EqExpression → RelExpression ( ( == | != ) RelExpression )*
+RelExpression → AddExpression ( ( < | > | <= | >= ) AddExpression )*
+AddExpression → MultExpression ( ( + | - ) MultExpression )*
+MultExpression → PowerExpression ( ( * | / | % ) PowerExpression )*
+PowerExpression → UnaryExpression ( ** PowerExpression |  ε )
+UnaryExpression → + UnaryExpression | - UnaryExpression | ! UnaryExpression | Primary
+Primary → INTEGER_LITERAL | BOOLEAN_LITERAL | FLOAT_LITERAL | CHAR_LITERAL
+ | STRING_LITERAL | ( Expression ) | IDENTIFIER | Function
+Function → FunctionName ( Expression )
+FunctionName → sin | cos | atan | abs | log | int | float
+
+
+Abstract Syntax:
+Program → IDENTIFIER Block 
+Block → ( Declaration | Statement )* 
+Declaration → VariableDeclaration | VariableListDeclaration
+VariableDeclaration → Type IDENTIFIER ( ε | Expression )
+VariableListDeclaration → Type IDENTIFIER  IDENTIFIER +
+Type → int | float | boolean | char | string 
+Statement → StatementInput | StatementWrite | StatementAssign | StatementWhile | StatementIf | StatementShow | StatementSleep 
+IfStatement → Expression Block 
+WhileStatement → Expression Block
+AssignmentStatement → IDENTIFIER Expression 
+SleepStatement → Expression
+PrintStatement → Expression
+ExpressionConditional → Expression Expression Expression 
+ExpressionBinary → Expression op Expression 
+ExpressionBinary → Expression op Expression 
+ExpressionBinary → Expression op Expression 
+ExpressionBinary → Expression op Expression 
+ExpressionBinary → Expression op Expression 
+ExpressionBinary → Expression op Expression 
+ExpressionBinary → Expression op Expression 
+ExpressionUnary → Op Expression 
+ExpressionIdent 
+ExpressionIntegerLiteral 
+ExpressionBooleanLiteral 
+ExpressionFloatLiteral 
+ExpressionCharLiteral
+ExpressionStringLiteral
+FunctionWithArg → FunctionName Expression 
+FunctionName → sin | cos | atan | abs | log | int | float

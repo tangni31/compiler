@@ -9,7 +9,7 @@ Scanner groups input characters into tokens. It saves the text of “interesting
 
 The parser is the heart of a typical compiler. It calls the scanner to obtain the tokens of the input program, assembles the tokens together, checks tokens violate CFG or not and passes them to the later phases of the compiler.
 
-##### Grammar:  [Context Free Grammar](https://github.com/tangni31/compiler/blob/master/Context%20Free%20Grammar.txt)
+##### Grammar:  [Context Free Grammar and Abstract Syntax](https://github.com/tangni31/compiler/blob/master/Context%20Free%20Grammar.txt)
 
 
 
