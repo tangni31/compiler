@@ -119,6 +119,10 @@ public class PLPScanner {
 		public int posInLine() {
 			return PLPScanner.this.posInLine(pos) + 1;
 		}
+		
+		public String getName(){
+			return String.copyValueOf(chars, pos, length);
+		}
 
 		public String toString() {
 			int line = line();
