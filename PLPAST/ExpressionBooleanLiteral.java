@@ -13,7 +13,7 @@ public class ExpressionBooleanLiteral extends Expression {
 	
 	@Override
 	public Object visit(PLPASTVisitor v, Object arg) throws Exception {
-		return v.visitBooleanLiteral(this, arg);
+		return v.visitExpressionBooleanLiteral(this, arg);
 	}
 
 	@Override

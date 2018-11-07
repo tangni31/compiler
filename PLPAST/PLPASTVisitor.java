@@ -10,7 +10,7 @@ public interface PLPASTVisitor {
 	
 	Object visitVariableListDeclaration(VariableListDeclaration declaration, Object arg) throws Exception;
 	
-	Object visitBooleanLiteral(ExpressionBooleanLiteral expressionBooleanLiteral, Object arg) throws Exception;
+	Object visitExpressionBooleanLiteral(ExpressionBooleanLiteral expressionBooleanLiteral, Object arg) throws Exception;
 	
 	Object visitExpressionBinary(ExpressionBinary expressionBinary, Object arg) throws Exception;
 	
@@ -39,6 +39,8 @@ public interface PLPASTVisitor {
 	
 	Object visitAssignmentStatement(AssignmentStatement statementAssign, Object arg)
 			throws Exception;
+	
+	Object visitLHS(LHS lhs, Object arg) throws Exception;
 
 	Object visitIfStatement(IfStatement ifStatement, Object arg)
 			throws Exception;

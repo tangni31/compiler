@@ -3,12 +3,12 @@ package cop5556fa18.PLPAST;
 import cop5556fa18.PLPScanner.Token;
 
 public class AssignmentStatement extends Statement {
-	public final String identifier;
+	public final LHS lhs;
 	public final Expression expression;
 	
-	public AssignmentStatement(Token firstToken, String identifier, Expression expression) {
+	public AssignmentStatement(Token firstToken, LHS lhs, Expression expression) {
 		super(firstToken);
-		this.identifier = identifier;
+		this.lhs = lhs;
 		this.expression = expression;
 	}
 
@@ -22,7 +22,7 @@ public class AssignmentStatement extends Statement {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((expression == null) ? 0 : expression.hashCode());
-		result = prime * result + ((identifier == null) ? 0 : identifier.hashCode());
+		result = prime * result + ((lhs == null) ? 0 : lhs.hashCode());
 		return result;
 	}
 
@@ -40,10 +40,10 @@ public class AssignmentStatement extends Statement {
 				return false;
 		} else if (!expression.equals(other.expression))
 			return false;
-		if (identifier == null) {
-			if (other.identifier != null)
+		if (lhs == null) {
+			if (other.lhs != null)
 				return false;
-		} else if (!identifier.equals(other.identifier))
+		} else if (!lhs.equals(other.lhs))
 			return false;
 		return true;
 	}
