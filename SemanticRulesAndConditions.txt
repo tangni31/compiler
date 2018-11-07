@@ -1,0 +1,68 @@
+Semantic rules and conditions:
+
+Block -> enterScope  ( Declaration | Statement )* leaveScope
+
+Declaration.name <- IDENTIFIER.name
+Declaration.name not in  SymbolTable.currentScope
+Expression == E   or  Expression.type == type
+
+SymbolTable <-  SymbolTable U (name, Declaration)
+
+for each IDENTIFIER do
+    Declaration.name <- IDENTIFIER.name
+    Declaration.name not in  SymbolTable.currentScope
+    SymbolTable <-  SymbolTable U  (name, Declaration)
+end
+
+LHS.type == Expression.type
+Expression.type == boolean
+Expression.type == boolean
+Expression.type ¡Ê {int, boolean, float, char, string}
+Expression.type == integer
+LHS.name <- IDENTIFIER.name
+LHS.dec <-SymbolTable.lookup(LHS.name)
+LHS.dec != null
+LHS.type <- LHS.dec.type
+Expression.type <- type of right-hand side expression
+Expression0 .type == boolean
+Expression1.type == Expression2 .type
+ExpressionConditional.type <-  Expression1.type
+ExpressionBinary.type <- inferredType(Expression0.type, Expression1.type, op)
+(inferredType is defined below)
+ExpressionUnary.type <- Expression.type
+ExpressionIdent.dec <- SymbolTable.lookup(ExpressionIdent.name)
+ExpressionIdent.dec != null
+ExpressionIdent.type <- ExpressionIdent.dec.type
+ExpressionIntegerLiteral.type <- integer
+ExpressionBooleanLiteral.type <- boolean
+ExpressionFloatLiteral.type <- float
+ExpressionCharLiteral <- char
+ExpressionCharLiteral <- string
+
+FunctionWithArg.type <- inferredTypeFunctionWithArg (FunctionName, Expression.type)
+(see below)
+
+
+Legal argument types for operators and functions:
+
+Expression0.type	Expression1.type	Operator	     inferred type for ExpressionBinary.type
+  integer		  integer	       +,-,*,/,%,**, &, |	        integer
+  float			  float			+,-,*,/,**			float
+  float			  integer		+,-,*,/,**			float
+  integer		  float			+,-,*,/,**			float
+  string		  string		    +				string
+  boolean		  boolean		  &, |				boolean
+  integer		  integer		  &, | 				integer
+  integer		  integer	     ==, !=, >,>=, <, <=		boolean
+  float			  float		     ==, !=, >,>=, <, <=		boolean
+  boolean		  boolean	     ==, !=, >,>=, <, <=		boolean
+
+
+
+Expression.type		      Function		    inferred type for FunctionWithArg
+  integer			abs				integer
+  float			abs, sin, cos, atan, log		float
+  int				float				float
+  float				float				float
+  float				int				int
+  int 				int 				int
