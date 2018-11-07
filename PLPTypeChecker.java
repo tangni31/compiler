@@ -1,10 +1,6 @@
 package cop5556fa18;
 
-/*
-* Name: Ni Tang 
-* Assignment Number: P5
-* Date Due: November 05, 2018
-*/
+ 
 
 import java.util.List;
 
